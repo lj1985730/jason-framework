@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd"
+       default-lazy-init="true">
+
+    <context:annotation-config />
+
+    <!-- 初始化bean上下文帮助类 -->
+    <bean class="com.yoogun.core.infrastructure.SpringContextUtils" destroy-method="clearHolder" lazy-init="false" />
+
+    <context:component-scan base-package="com.yoogun.core.repository" />
+
+    <!-- 可追加配置二级缓存 -->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" destroy-method="destroy">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan">
+            <list>
+                <value>com.yoogun.**.entity</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${db.dialect}</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hibernate.connection.release_mode">AFTER_TRANSACTION</prop>
+                <prop key="hibernate.query.substitutions">true 1, false 0</prop>
+                <prop key="hibernate.default_batch_fetch_size">16</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <prop key="hibernate.max_fetch_depth">2</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+            </props>
+        </property>
+    </bean>-->
+
+    <!-- boolean类型映射处理器 -->
+    <bean id="booleanTypeHandler" class="com.yoogun.core.infrastructure.BooleanTypeHandler" />
+
+    <!-- 统一异常处理器 -->
+    <bean id="baseExceptionHandler" class="com.yoogun.core.infrastructure.exception.BaseExceptionHandler" />
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.yoogun" />
+        <property name="typeAliasesSuperType" value="com.yoogun.core.domain.model.BaseEntity" />
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <!-- 开启驼峰字段映射 -->
+                <property name="mapUnderscoreToCamelCase" value="true" />
+            </bean>
+        </property>
+        <property name="typeHandlers" ref="booleanTypeHandler" />
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <!--The annotation property specifies an annotation to search for
+    The marker-interface attribute specifies a parent interface to search for-->
+    <mybatis:scan factory-ref="sqlSessionFactory"
+            base-package="com.yoogun"
+            marker-interface="com.yoogun.core.repository.BaseDao"
+            annotation="org.springframework.stereotype.Repository"
+    />
+
+ <!--   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.yoogun" />
+        <property name="annotationClass" value="com.yoogun.core.infrastructure.annotation.MyBatisDao" />
+    </bean>-->
+
+    <!-- CGLIB 实现aop注解支持 CGLIB -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <!-- 事务管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 声明式事务管理 -->
+    <tx:annotation-driven proxy-target-class="true" />
+
+</beans>

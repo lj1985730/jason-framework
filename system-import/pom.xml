@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yoogun</groupId>
+        <artifactId>yoogun-framework</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>system-import</artifactId>
+    <packaging>pom</packaging>
+
+    <name>system-import</name>
+
+    <modules>
+        <module>import-commons</module>
+        <module>import-db</module>
+        <module>import-json</module>
+        <module>import-log</module>
+        <module>import-orm</module>
+        <module>import-others</module>
+        <module>import-security</module>
+        <module>import-spring</module>
+        <module>import-webservice</module>
+    </modules>
+
+
+</project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true">
+
+    <!-- 默认密码，此处配置的优先级，低于数据库SYS_CONFIG表中defaultPassword的值 -->
+    <!-- 在数据库无配置或者配置为空时使用本设置值 -->
+    <bean id="defaultPassword" class="java.lang.String">
+        <constructor-arg value="123456" />
+    </bean>
+
+    <!-- 配置文件对象 -->
+    <util:properties id="authInitializeProperties" location="classpath:initialize-auth.properties" />
+
+    <!-- 配置文件加载器 -->
+    <bean id="propertiesLoader" class="com.yoogun.auth.infrastructure.PropertiesLoader" lazy-init="false" />
+
+    <!-- 静态注入配置文件 -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="com.yoogun.auth.infrastructure.PropertiesLoader.setProperties" />
+        <property name="arguments">
+            <list>
+                <ref bean="authInitializeProperties" />
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="com.yoogun.auth.application.service,com.yoogun.auth.repository" />
+
+    <!-- 权限异常处理器 -->
+    <bean id="authExceptionHandler" class="com.yoogun.auth.infrastructure.exception.AuthExceptionHandler" />
+
+</beans>

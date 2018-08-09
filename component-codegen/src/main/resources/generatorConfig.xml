@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<properties resource="mybatis.properties" />
+
+	<context id="context">
+
+		<!-- entity 生成器 -->
+		<plugin type="com.yoogun.generator.GenerateEntityFilePlugin">
+			<property name="developer" value="${codegen.developer}" />
+			<property name="treeEntity" value="${codegen.treeEntity}" />
+		</plugin>
+
+		<!-- jsp生成器 -->
+		<plugin type="com.yoogun.generator.GenerateJspFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}"/>
+			<property name="targetPackage" value="pages" />
+			<property name="moduleName" value="${codegen.moduleName}" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- js生成器 -->
+		<plugin type="com.yoogun.generator.GenerateJsFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}" />
+			<property name="targetPackage" value="scripts" />
+			<property name="moduleName" value="${codegen.moduleName}" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- dao生成器 -->
+		<plugin type="com.yoogun.generator.GenerateDaoFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}/java" />
+			<property name="targetPackage" value="com.yoogun.${codegen.moduleName}.XXX.repository" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- vo生成器 -->
+		<plugin type="com.yoogun.generator.GenerateVoFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}/java"/>
+			<property name="targetPackage" value="com.yoogun.${codegen.moduleName}.XXX.application.vo" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- service生成器 -->
+		<plugin type="com.yoogun.generator.GenerateServiceFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}/java"/>
+			<property name="targetPackage" value="com.yoogun.${codegen.moduleName}.XXX.application.service" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="treeEntity" value="${codegen.treeEntity}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- controller生成器 -->
+		<plugin type="com.yoogun.generator.GenerateControllerFilePlugin">
+			<property name="targetProject" value="${codegen.distPath}/java" />
+			<property name="targetPackage" value="com.yoogun.${codegen.moduleName}.XXX.application.controller" />
+			<property name="moduleName" value="${codegen.moduleName}" />
+			<property name="developer" value="${codegen.developer}" />
+			<property name="moduleNature" value="${codegen.moduleNature}" />
+		</plugin>
+
+		<!-- 屏蔽注释生成 ，放在最前面，使javaFileEncoding生效 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+			<property name="javaFileEncoding" value="UTF-8" />
+		</commentGenerator>
+
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}" >
+			<property name="remarksReporting" value="true" />
+		</jdbcConnection>
+
+		<!-- 生成entity的包名和位置 -->
+		<javaModelGenerator targetProject="${codegen.distPath}/java"
+							targetPackage="com.yoogun.${codegen.moduleName}.admin.domain.model" />
+
+		<!-- 映射表名 -->
+    	<table tableName="${codegen.tableName}"
+			domainObjectName="${codegen.modelName}"
+			enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"  
+            selectByExampleQueryId="false"> 
+		</table>
+
+	</context>
+</generatorConfiguration>

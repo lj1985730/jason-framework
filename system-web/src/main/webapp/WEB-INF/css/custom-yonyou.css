@@ -1,0 +1,224 @@
+body {
+    color: #73879C;
+}
+
+.breadcrumb {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
+    border: 0 !important;
+}
+
+.badge {
+    background-color: #73879C;
+}
+
+@media (min-width: 992px) {
+    .modal-sm {
+        width: 400px;
+        margin: 150px auto;
+    }
+}
+
+/* header height */
+.page-header.navbar {
+    height: 32px;
+    min-height: 32px;
+}
+
+.page-header.navbar .page-logo {
+    height: 32px;
+}
+
+.page-header.navbar .page-logo .logo-default {
+    margin-top: 9px;
+}
+
+.page-header.navbar .menu-toggler.sidebar-toggler {
+    margin-top: 4px;
+}
+
+.page-header.navbar .menu-toggler.responsive-toggler {
+    margin-top: 4px;
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown {
+    height: 32px;
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.page-header-fixed .page-container {
+    margin-top: 32px;
+}
+
+/* menu width */
+@media (min-width: 992px) {
+    .page-sidebar {
+        width: 180px;
+    }
+
+    .page-content-wrapper .page-content {
+        margin-left: 180px;
+        padding: 10px 15px 10px 10px;
+    }
+
+    .breadcrumb {
+        margin-bottom: 10px;
+    }
+}
+.page-sidebar .page-sidebar-menu .sub-menu li > a {
+    padding: 6px 15px 6px 25px;
+}
+.page-sidebar .page-sidebar-menu .sub-menu li > a > i {
+    color: #6fa7d7;
+}
+.page-sidebar .page-sidebar-menu > li > a > i[class*="icon-"] {
+    color: #6fa7d7;
+}
+
+.page-content {
+    background-color: #F7F7F7;
+}
+
+/* footer height */
+.page-footer {
+    height: 30px;
+}
+
+.btn {
+    font-size: 14px;
+}
+
+.portlet > .portlet-title {
+    min-height: 38px;
+}
+
+.portlet > .portlet-title > .tools {
+    padding-left: 5px !important;
+}
+
+.portlet.box > .portlet-title > .caption {
+    padding: 10px 0;
+}
+
+/* portlet-title 上的按钮样式 */
+.portlet.box > .portlet-title > .actions > .btn-default > i {
+    color: #ddebf9 !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-default:hover > i {
+    color: #ffffff !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-default {
+    color: #ddebf9 !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-default:hover {
+    color: #ffffff !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-group > .btn-default > i {
+    color: #ddebf9 !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-group > .btn-default:hover > i {
+    color: #ffffff !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-group > .btn-default {
+    color: #ddebf9 !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-group > .btn-default:hover {
+    color: #ffffff !important;
+}
+.portlet.box > .portlet-title > .actions > .btn-icon-only {
+    height: auto;
+    width: auto;
+}
+
+/* bootstrap-table */
+.page-title > h1 {
+    margin-top: 0;
+}
+
+/* bootstrap-table > toolbar */
+.fixed-table-toolbar > .bars {
+    height: auto;
+}
+.fixed-table-toolbar > .btn-group > .btn {
+    padding: 7px 14px 6px 14px;
+}
+.fixed-table-toolbar > .btn-group > .btn-default {
+    background-color: #ffffff;
+}
+.fixed-table-toolbar > .btn-group > .btn-group > .btn {
+    padding: 7px 14px 6px 14px;
+    background-color: #ffffff;
+}
+
+/* bootstrap-table > thead */
+.bootstrap-table div:not(.datepicker-days) > .table > thead {
+    background: rgba(52, 73, 94, .94);
+    color: #ECF0F1;
+}
+div:not(.datepicker-days) > .table.table-bordered > thead > tr > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.bootstrap-table div:not(.datepicker-days) > .table > thead > tr:not(.no-records-found) > th:first-child {
+    display: none;
+}
+
+.bootstrap-table div:not(.datepicker-days) > .table > tbody > tr:not(.no-records-found) > .bs-checkbox {
+    display: none;
+}
+
+.bootstrap-table div:not(.datepicker-days) > .table > tbody > tr:not(.no-records-found) > td > .card-view:first-child {
+    display: none;
+}
+
+.table-condensed thead th .th-inner, .fixed-table-container tbody td .th-inner {
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+.fixed-table-loading {
+    line-height: 29px;
+}
+
+/* bootstrap-table > selected row */
+.fixed-table-container tbody .selected td {
+    background: #E5FDF4;
+}
+
+/* bootstrap-table > pagination */
+.fixed-table-pagination > .pagination-detail > .page-list > .btn-group > .btn {
+    padding: 7px 14px 6px 14px;
+    background-color: #ffffff;
+}
+
+/* form-md-line-input validation */
+.form-group.form-md-line-input.has-error .help-block {
+    opacity: 1;
+}
+.help-block {
+    color: #ccc;
+}
+
+/* tab color */
+.tabbable-custom > .nav-tabs > li.active {
+    border-top: 3px solid #67809F;
+}
+
+/* treeview icheckbox */
+.treeview span.icon {
+    width: 20px !important;
+}
+
+/* modal backdrop */
+.modal-backdrop, .modal-backdrop.fade.in {
+    opacity: 0.6;
+}
+
+.help-block {
+    margin-top: 0;
+    margin-bottom: 0;
+}

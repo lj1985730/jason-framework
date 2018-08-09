@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+
+    <!-- 指定一个文件目录，当EhCache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
+    <diskStore path="java.io.tmpdir" />
+
+    <!-- 设定缓存的默认数据过期策略 -->
+    <!--
+        maxElementsInMemory：
+            内存中最大缓存对象数。
+        maxElementsOnDisk：
+            硬盘中最大缓存对象数，若是0表示无穷大。
+        overflowToDisk：
+            true表示当内存缓存的对象数目达到了maxElementsInMemory界限后，会把溢出
+            的对象写到硬盘缓存中。
+            注意：如果缓存的对象要写入到硬盘中的话，则该对象必须实现了Serializable接口
+            才行。
+        maxEntriesLocalHeap：
+            是用来限制当前缓存在堆内存上所能保存的最大元素数量的。
+            Ehcache规定如果在CacheManager上没有指定maxBytesLocalHeap时必须在各个
+            Cache上指定maxBytesLocalHeap或者maxEntriesLocalHeap，但maxEntriesLocalHeap
+            和maxBytesLocalHeap不能同时出现。也就是说我们不能在一个Cache上同时指定
+            maxBytesLocalHeap和maxEntriesLocalHeap，当然我们也不能在Cache上指定
+            maxEntriesLocalHeap的同时在CacheManager上指定maxBytesLocalHeap。但同
+            时在CacheManager和Cache上指定maxBytesLocalHeap则是允许的。
+        eternal：
+            true表示对象永不过期，此时忽略timeToIdleSeconds和timeToLiveSeconds属性，
+            默认为false。
+        diskSpoolBufferSize：
+            （MB）磁盘缓存区大小，默认为30MB。每个Cache都应该有自己的一个缓存区。
+        diskPersistent：default：false
+            是否缓存虚拟机重启期数据，是否持久化磁盘缓存，当这个属性的值为true时，
+            系统在初始化时会在磁盘中查找文件名为cache名称,后缀名为index的文件，这个文
+            件中存放了已经持久化在磁盘中的cache的index,找到后会把cache加载到内存，要
+            想把cache真正持久化到磁盘，写程序时注意执行
+            net.sf.ehcache.Cache.put(Element element)后要调用flush()方法。
+        timeToIdleSeconds：
+            设定允许对象处于空闲状态的最长时间（秒）。
+            当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds
+            属性值，这个对象就会过期，EHCache将把它从缓存中清空。只有当eternal属性
+            为false，该属性才有效。如果该属性值为0，则表示对象可以无限 期地处于空闲状态。
+        timeToLiveSeconds：
+            设定对象允许存在于缓存中的最长时间（秒）。
+            当对象自从被存放到缓存中后，如果处于缓存中的时间超过了timeToLiveSeconds
+            属性值，这个对象就会过期，EHCache将把它从缓存中清除。只有当eternal属性
+            为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地存在于缓存中。
+            timeToLiveSeconds必须大于timeToIdleSeconds属性，才有意义
+        diskExpiryThreadIntervalSeconds：
+            磁盘失效线程运行时间间隔，默认为120（秒）。
+        memoryStoreEvictionPolicy：
+            当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。
+            可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、
+            LFU（最少访问次数）
+        clearOnFlush：
+            内存数量最大时是否清除。
+    -->
+
+    <!-- 字典数据缓存 锁定10分钟 -->
+    <cache name="dictCache"
+           maxElementsInMemory="2000"
+           overflowToDisk="true"
+           maxElementsOnDisk="0"
+           maxEntriesLocalHeap="5000"
+           eternal="true"
+           diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="true">
+    </cache>
+
+    <!-- 系统数据缓存 -->
+    <cache name="systemCache"
+           maxElementsInMemory="2000"
+           overflowToDisk="true"
+           maxElementsOnDisk="0"
+           maxEntriesLocalHeap="5000"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="18000"
+           statistics="true">
+    </cache>
+
+    <!-- 菜单数据缓存 -->
+    <cache name="menuCache"
+           maxEntriesLocalHeap="2000"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <!-- 导出excel数据缓存，不向磁盘持久化 -->
+    <cache name="exportExcelCache"
+           maxElementsInMemory="10000"
+           overflowToDisk="true"
+           maxElementsOnDisk="0"
+           maxEntriesLocalHeap="5000"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="18000"
+           statistics="true">
+    </cache>
+
+</ehcache>

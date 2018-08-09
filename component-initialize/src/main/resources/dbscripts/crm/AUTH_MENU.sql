@@ -1,0 +1,4 @@
+-- 初始化脚本 - 用友企业
+INSERT INTO AUTH_MENU VALUES ('${UUID-AUTH_MENU-4}', '统一营销数据库', '#', 3, 'T', null, 'icon-book-open', null, 'CRM', 1, null, 1, 'T', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-AUTH_MENU-41}', '统一营销管理', '${UUID-AUTH_MENU-4}', 1, 'T', '/crm/customer/homeView', null, null, null, 2, null, 1, 'T', null, 'crm:customer:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-AUTH_MENU-42}', '综合查询', '${UUID-AUTH_MENU-4}', 2, 'T', '/crm/customer/queryHomeView', null, null, null, 2, null, 1, 'T', null, 'crm:customer-query:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);

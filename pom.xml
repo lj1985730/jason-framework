@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yoogun</groupId>
+    <artifactId>yoogun-framework</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.repo>118.190.76.87:7081</maven.repo>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- release plugin needed -->
+    <!-- The developerConnection contains the URL of the Source Control Management system pointing to the folder containing this pom.xml -->
+    <!-- <scm>
+            <developerConnection>scm:svn:svn://192.168.102.20/7SourceCode/mcplatform/trunk/</developerConnection>
+        </scm>-->
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-snapshots</id>
+            <url>http://${maven.repo}/repository/maven-snapshots/</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <finalName>yoogun-framework</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <charset>UTF-8</charset>
+                        <encoding>UTF-8</encoding>
+                        <docencoding>UTF-8</docencoding>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <classifier>classes</classifier>
+                                <excludes>
+                                    <exclude>*.properties</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>config-*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+    <modules>
+        <module>system-import</module>
+<!-- <module>component-codegen</module> -->
+        <module>system-core</module>
+        <module>system-web</module>
+        <module>component-utils</module>
+        <module>system-auth</module>
+        <module>system-base</module>
+        <module>system-database</module>
+        <module>component-chart</module>
+<!-- <module>component-initialize</module> -->
+        <module>component-workflow</module>
+<!-- <module>module-meeting</module> -->
+        <module>project-crm</module>
+<!-- <module>project-cms</module> -->
+<!-- <module>project-lawfirm</module> -->
+<!-- <module>project-addrlist</module> -->
+    </modules>
+
+</project>

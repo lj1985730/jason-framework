@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:cache="http://www.springframework.org/schema/cache"
+      xmlns:util="http://www.springframework.org/schema/util"
+      xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+      default-lazy-init="true">
+
+   <context:component-scan base-package="com.yoogun.utils.application.service,com.yoogun.utils.repository" />
+
+   <!-- 配置文件对象 -->
+   <util:properties id="utilInitializeProperties" location="classpath:initialize-utils.properties" />
+
+   <!-- 将静态帮助类加入spring管理 -->
+   <bean class="com.yoogun.utils.infrastructure.DictUtils" lazy-init="false" />
+   <bean class="com.yoogun.utils.infrastructure.EhCacheUtils" lazy-init="false" />
+   <bean class="com.yoogun.utils.infrastructure.SmsUtils" lazy-init="false" />
+
+   <!-- cacheManager工厂类，指定ehcache配置文件的位置 -->
+   <bean id="utilsCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+      <property name="configLocation" value="classpath:ehcache-utils.xml" />
+      <property name="cacheManagerName" value="utilsCacheManager" />
+   </bean>
+
+   <!-- 声明cacheManager -->
+   <bean id="utilsEhcacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+      <property name="cacheManager" ref="utilsCacheManager" />
+      <!-- 是否事务环绕的，如果true，则如果事务回滚，缓存也回滚，默认false -->
+      <property name="transactionAware" value="true"/>
+   </bean>
+
+   <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
+   <cache:annotation-driven cache-manager="utilsEhcacheManager" proxy-target-class="true"  />
+
+</beans>

@@ -1,0 +1,17 @@
+-- 初始化脚本 - 用友企业
+DELETE FROM AUTH_MENU WHERE TENANT_ID = '${tenantId}';
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-1}', '系统管理', '#', 1, 'T', null, 'icon-settings', null, '系统管理', 1, null, 0, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+-- INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-11}', '子系统管理', '${UUID-T_AUTH_MENU-1}', 0, 'T', '/auth/system/homeView', null, null, '系统-系统管理', 2, null, 2, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-12}', '企业管理', '${UUID-T_AUTH_MENU-1}', 1, 'T', '/auth/tenant/homeView', null, null, '系统-企业管理，超管使用', 2, null, 2, 'F', null, 'auth:tenant:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-13}', '我的企业', '${UUID-T_AUTH_MENU-1}', 2, 'T', '/auth/tenant/selfHomeView', null, null, '系统-我的企业，租户使用', 2, null, 1, 'T', null, 'system:self-tenant:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-14}', '组织机构', '${UUID-T_AUTH_MENU-1}', 3, 'T', '/auth/department/homeViewNew', null, null, '系统-部门管理', 2, null, 1, 'T', null, 'auth:department:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+-- INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-15}', '岗位管理', '${UUID-T_AUTH_MENU-1}', 4, 'T', '/auth/post/homeView', null, null, '系统-岗位管理', 2, null, 1, 'F', null, 'auth:post:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+-- INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-16}', '人员管理', '${UUID-T_AUTH_MENU-1}', 5, 'T', '/auth/person/homeView', null, null, '系统-人员管理', 2, null, 1, 'F', null, 'auth:person:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-17}', '系统参数', '${UUID-T_AUTH_MENU-1}', 6, 'T', '/base/sysConfig/homeView', null, null, '系统-系统参数', 2, null, 2, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-18}', '系统字典', '${UUID-T_AUTH_MENU-1}', 7, 'T', '/base/sysDict/homeView', null, null, '系统-系统字典', 2, null, 1, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-2}', '权限管理', '#', 2, 'T', null, 'icon-users', null, '权限管理', 1, null, 0, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-21}', '账户管理', '${UUID-T_AUTH_MENU-2}', 1, 'T', '/auth/account/homeView', null, null, '权限-账户管理', 2, null, 1, 'F', null, 'auth:account:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-22}', '角色管理', '${UUID-T_AUTH_MENU-2}', 2, 'T', '/auth/role/homeView', null, null, '权限-角色管理', 2, null, 1, 'F', null, 'auth:role:view', '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-23}', '菜单管理', '${UUID-T_AUTH_MENU-2}', 3, 'T', '/auth/menu/homeView', null, null, '权限-菜单管理', 2, null, 2, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
+INSERT INTO AUTH_MENU VALUES ('${UUID-T_AUTH_MENU-24}', '按钮管理', '${UUID-T_AUTH_MENU-2}', 4, 'T', '/auth/button/homeView', null, null, '权限-按钮管理', 2, null, 2, 'F', null, null, '${tenantId}', 'F', '${superAdminId}', CURRENT_TIMESTAMP);
